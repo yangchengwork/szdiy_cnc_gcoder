@@ -3,7 +3,7 @@
 1. 从`release`下载程序压缩包，并解压。
 2. 使用得到的应用程序，比如：
 ```
-gcoder "dragon with fire"
+./gcoder "dragon with fire"
 ```
 3. 正常情况下，会输出如下log：
 ```
