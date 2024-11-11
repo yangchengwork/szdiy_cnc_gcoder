@@ -26,3 +26,12 @@ TODO:
 整合串口输出到设备绘图的部份。
 增加AI文生图的其他可选项。
 优化文生图的速度，目前可能需要至多1分钟才能拿到图片。
+
+
+## 如果要自己编译源代码
+1. 首先请安装rust编译链：https://www.rust-lang.org/learn/get-started
+2. 克隆代码，并进入目录
+3. 运行：
+```
+cargo run "dragon with fire"
+```
