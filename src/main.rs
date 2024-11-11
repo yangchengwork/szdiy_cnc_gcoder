@@ -19,7 +19,7 @@ async fn main() -> Result<()> {
     let jpeg_path =Path::new("foo.jpeg");
     let svg_path =Path::new("foo.svg");
     let gcode_path =Path::new("foo.gcode");
-    println!("Hello, world!");
+    // println!("Hello, world!");
     let url = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev";
     let args: Vec<String> = env::args().collect();
     // let url = args[1].clone();
@@ -32,7 +32,7 @@ async fn main() -> Result<()> {
     let (tx, mut rx) = mpsc::channel(32);
 
     tokio::spawn(async move {
-        let res = cli::sentiment(&url, &prompt).await.unwrap();
+        let res = gcoder::sentiment(&url, &prompt).await.unwrap();
         tx.send(res).await.unwrap();
     });
 
