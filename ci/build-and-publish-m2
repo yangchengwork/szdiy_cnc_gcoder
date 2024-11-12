@@ -30,8 +30,8 @@ ARCHIVE="deployment/m2/$NAME"
 mkdir -p "$ARCHIVE"/{complete,doc}
 cp "$BIN" "$ARCHIVE"/
 strip "$ARCHIVE/gcoder"
-cp {README.md,COPYING,UNLICENSE,LICENSE-MIT} "$ARCHIVE"/
-cp {CHANGELOG.md,FAQ.md,GUIDE.md} "$ARCHIVE"/doc/
+# cp {README.md,COPYING,UNLICENSE,LICENSE-MIT} "$ARCHIVE"/
+# cp {CHANGELOG.md,FAQ.md,GUIDE.md} "$ARCHIVE"/doc/
 "$BIN" --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
 "$BIN" --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
 "$BIN" --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
