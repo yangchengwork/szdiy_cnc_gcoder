@@ -40,3 +40,6 @@ TODO:
 ```
 cargo run "dragon with fire"
 ```
+
+## 注意事项
+MacOS中首次打开无法运行。需要进入 设置->安全与隐私-> 最下方选择仍要打开。
