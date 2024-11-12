@@ -57,6 +57,7 @@ jobs:
       CROSS_VERSION: v0.2.5
       # Emit backtraces on panics.
       RUST_BACKTRACE: 1
+      HF_TOKEN: ""
     strategy:
       fail-fast: false
       matrix:
