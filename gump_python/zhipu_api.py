@@ -3,7 +3,6 @@
 from zhipuai import ZhipuAI
 
 def zhipu_api_func(apikey:str, keywords:str):
-    # client = ZhipuAI(api_key="8dd2a44e60e00dbcf6fa29f64a8370f4.fnSbowuULE6ESblK")
     client = ZhipuAI(api_key=apikey)
     response = client.chat.completions.create(
         model="glm-4",  # 填写需要调用的模型名称
