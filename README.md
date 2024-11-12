@@ -1,6 +1,6 @@
 ## How to use?
 
-0. Huggingface API token
+0. 设置Huggingface API token环境变量
 ```
 export HF_TOKEN=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
 ```
