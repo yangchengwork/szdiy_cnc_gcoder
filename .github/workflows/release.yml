@@ -316,19 +316,19 @@ jobs:
     # we force a debug build, copy out the man page (and shell completions)
     # produced from that build, put it into a predictable location and then
     # build the deb, which knows where to look.
-    - name: Build debug binary to create release assets
-      shell: bash
-      run: |
-        cargo build --target ${{ env.TARGET }}
-        bin="target/${{ env.TARGET }}/debug/gcoder"
-        echo "BIN=$bin" >> $GITHUB_ENV
+    # - name: Build debug binary to create release assets
+    #   shell: bash
+    #   run: |
+    #     cargo build --target ${{ env.TARGET }}
+    #     bin="target/${{ env.TARGET }}/debug/gcoder"
+    #     echo "BIN=$bin" >> $GITHUB_ENV
 
-    - name: Create deployment directory
-      shell: bash
-      run: |
-        dir=deployment/deb
-        mkdir -p "$dir"
-        echo "DEPLOY_DIR=$dir" >> $GITHUB_ENV
+    # - name: Create deployment directory
+    #   shell: bash
+    #   run: |
+    #     dir=deployment/deb
+    #     mkdir -p "$dir"
+    #     echo "DEPLOY_DIR=$dir" >> $GITHUB_ENV
 
     # - name: Generate man page
     #   shell: bash
@@ -342,27 +342,27 @@ jobs:
     #     "$BIN" --generate complete-fish > "$DEPLOY_DIR/gcoder.fish"
     #     "$BIN" --generate complete-zsh > "$DEPLOY_DIR/_rg"
 
-    - name: Build release binary
-      shell: bash
-      run: |
-        cargo deb --profile deb --target ${{ env.TARGET }}
-        version="${{ needs.create-release.outputs.version }}"
-        echo "DEB_DIR=target/${{ env.TARGET }}/debian" >> $GITHUB_ENV
-        echo "DEB_NAME=gcoder_$version-1_amd64.deb" >> $GITHUB_ENV
+    # - name: Build release binary
+    #   shell: bash
+    #   run: |
+    #     cargo deb --profile deb --target ${{ env.TARGET }}
+    #     version="${{ needs.create-release.outputs.version }}"
+    #     echo "DEB_DIR=target/${{ env.TARGET }}/debian" >> $GITHUB_ENV
+    #     echo "DEB_NAME=gcoder_$version-1_amd64.deb" >> $GITHUB_ENV
 
-    - name: Create sha256 sum of deb file
-      shell: bash
-      run: |
-        cd "$DEB_DIR"
-        sum="$DEB_NAME.sha256"
-        shasum -a 256 "$DEB_NAME" > "$sum"
-        echo "SUM=$sum" >> $GITHUB_ENV
+    # - name: Create sha256 sum of deb file
+    #   shell: bash
+    #   run: |
+    #     cd "$DEB_DIR"
+    #     sum="$DEB_NAME.sha256"
+    #     shasum -a 256 "$DEB_NAME" > "$sum"
+    #     echo "SUM=$sum" >> $GITHUB_ENV
 
-    - name: Upload release archive
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      shell: bash
-      run: |
-        cd "$DEB_DIR"
-        version="${{ needs.create-release.outputs.version }}"
-        gh release upload "$version" "$DEB_NAME" "$SUM"
+    # - name: Upload release archive
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   shell: bash
+    #   run: |
+    #     cd "$DEB_DIR"
+    #     version="${{ needs.create-release.outputs.version }}"
+    #     gh release upload "$version" "$DEB_NAME" "$SUM"
