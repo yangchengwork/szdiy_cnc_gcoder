@@ -14,16 +14,46 @@ use svg2gcode::{
 use g_code::emit::{format_gcode_io, FormatOptions};
 
 use roxmltree::ParsingOptions;
+
+use clap::{Parser, Subcommand};
+
+
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+struct Cli {
+    /// Optional name to operate on
+    object: String,
+
+    // Sets a custom config file
+    // #[arg(short, long, value_name = "FILE")]
+    // config: Option<PathBuf>,
+
+    // Turn debugging information on
+    // #[arg(short, long, action = clap::ArgAction::Count)]
+    // debug: u8,
+
+    // #[command(subcommand)]
+    // command: Option<Commands>,
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
+
+    let cli = Cli::parse();
+    // let mut words = "cat";
+    // if let Some(words) = cli.object.as_deref() {
+    //     println!("Yours: {words}~~");
+    // }
+    let words = cli.object;
+
     let jpeg_path =Path::new("foo.jpeg");
     let svg_path =Path::new("foo.svg");
     let gcode_path =Path::new("foo.gcode");
     // println!("Hello, world!");
     let url = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev";
-    let args: Vec<String> = env::args().collect();
+    // let args: Vec<String> = env::args().collect();
     // let url = args[1].clone();
-    let words = args[1].clone();
+    // let words = args[1].clone();
     let prompt = format!("Minimalistic outline illustration of {words} stick figure, simple yet elegant, blake and white, only outlines");
 
     let mut file = File::create(jpeg_path)?;

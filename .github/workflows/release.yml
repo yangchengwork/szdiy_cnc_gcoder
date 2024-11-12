@@ -57,7 +57,6 @@ jobs:
       CROSS_VERSION: v0.2.5
       # Emit backtraces on panics.
       RUST_BACKTRACE: 1
-      HF_TOKEN: ""
     strategy:
       fail-fast: false
       matrix:
@@ -217,11 +216,11 @@ jobs:
       shell: bash
       run: |
         "$BIN" --version
-        "$BIN" --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
-        "$BIN" --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
-        "$BIN" --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
-        "$BIN" --generate complete-zsh > "$ARCHIVE/complete/_rg"
-        "$BIN" --generate man > "$ARCHIVE/doc/gcoder.1"
+        # "$BIN" --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
+        # "$BIN" --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
+        # "$BIN" --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
+        # "$BIN" --generate complete-zsh > "$ARCHIVE/complete/_rg"
+        # "$BIN" --generate man > "$ARCHIVE/doc/gcoder.1"
 
     - name: Generate man page and completions (emulation)
       if: matrix.qemu != ''
@@ -231,31 +230,31 @@ jobs:
           "$PWD/target:/target:Z" \
           "ghcr.io/cross-rs/${{ matrix.target }}:main" \
           "${{ matrix.qemu }}" "/$BIN" --version
-        docker run --rm -v \
-          "$PWD/target:/target:Z" \
-          "ghcr.io/cross-rs/${{ matrix.target }}:main" \
-          "${{ matrix.qemu }}" "/$BIN" \
-            --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
-        docker run --rm -v \
-          "$PWD/target:/target:Z" \
-          "ghcr.io/cross-rs/${{ matrix.target }}:main" \
-          "${{ matrix.qemu }}" "/$BIN" \
-            --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
-        docker run --rm -v \
-          "$PWD/target:/target:Z" \
-          "ghcr.io/cross-rs/${{ matrix.target }}:main" \
-          "${{ matrix.qemu }}" "/$BIN" \
-            --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
-        docker run --rm -v \
-          "$PWD/target:/target:Z" \
-          "ghcr.io/cross-rs/${{ matrix.target }}:main" \
-          "${{ matrix.qemu }}" "/$BIN" \
-            --generate complete-zsh > "$ARCHIVE/complete/_rg"
-        docker run --rm -v \
-          "$PWD/target:/target:Z" \
-          "ghcr.io/cross-rs/${{ matrix.target }}:main" \
-          "${{ matrix.qemu }}" "/$BIN" \
-            --generate man > "$ARCHIVE/doc/gcoder.1"
+        # docker run --rm -v \
+        #   "$PWD/target:/target:Z" \
+        #   "ghcr.io/cross-rs/${{ matrix.target }}:main" \
+        #   "${{ matrix.qemu }}" "/$BIN" \
+        #     --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
+        # docker run --rm -v \
+        #   "$PWD/target:/target:Z" \
+        #   "ghcr.io/cross-rs/${{ matrix.target }}:main" \
+        #   "${{ matrix.qemu }}" "/$BIN" \
+        #     --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
+        # docker run --rm -v \
+        #   "$PWD/target:/target:Z" \
+        #   "ghcr.io/cross-rs/${{ matrix.target }}:main" \
+        #   "${{ matrix.qemu }}" "/$BIN" \
+        #     --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
+        # docker run --rm -v \
+        #   "$PWD/target:/target:Z" \
+        #   "ghcr.io/cross-rs/${{ matrix.target }}:main" \
+        #   "${{ matrix.qemu }}" "/$BIN" \
+        #     --generate complete-zsh > "$ARCHIVE/complete/_rg"
+        # docker run --rm -v \
+        #   "$PWD/target:/target:Z" \
+        #   "ghcr.io/cross-rs/${{ matrix.target }}:main" \
+        #   "${{ matrix.qemu }}" "/$BIN" \
+        #     --generate man > "$ARCHIVE/doc/gcoder.1"
 
     - name: Build archive (Windows)
       shell: bash
@@ -331,17 +330,17 @@ jobs:
         mkdir -p "$dir"
         echo "DEPLOY_DIR=$dir" >> $GITHUB_ENV
 
-    - name: Generate man page
-      shell: bash
-      run: |
-        "$BIN" --generate man > "$DEPLOY_DIR/gcoder.1"
+    # - name: Generate man page
+    #   shell: bash
+    #   run: |
+    #     "$BIN" --generate man > "$DEPLOY_DIR/gcoder.1"
 
-    - name: Generate shell completions
-      shell: bash
-      run: |
-        "$BIN" --generate complete-bash > "$DEPLOY_DIR/gcoder.bash"
-        "$BIN" --generate complete-fish > "$DEPLOY_DIR/gcoder.fish"
-        "$BIN" --generate complete-zsh > "$DEPLOY_DIR/_rg"
+    # - name: Generate shell completions
+    #   shell: bash
+    #   run: |
+    #     "$BIN" --generate complete-bash > "$DEPLOY_DIR/gcoder.bash"
+    #     "$BIN" --generate complete-fish > "$DEPLOY_DIR/gcoder.fish"
+    #     "$BIN" --generate complete-zsh > "$DEPLOY_DIR/_rg"
 
     - name: Build release binary
       shell: bash

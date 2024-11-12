@@ -32,11 +32,11 @@ cp "$BIN" "$ARCHIVE"/
 strip "$ARCHIVE/gcoder"
 # cp {README.md,COPYING,UNLICENSE,LICENSE-MIT} "$ARCHIVE"/
 # cp {CHANGELOG.md,FAQ.md,GUIDE.md} "$ARCHIVE"/doc/
-"$BIN" --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
-"$BIN" --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
-"$BIN" --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
-"$BIN" --generate complete-zsh > "$ARCHIVE/complete/_rg"
-"$BIN" --generate man > "$ARCHIVE/doc/gcoder.1"
+# "$BIN" --generate complete-bash > "$ARCHIVE/complete/gcoder.bash"
+# "$BIN" --generate complete-fish > "$ARCHIVE/complete/gcoder.fish"
+# "$BIN" --generate complete-powershell > "$ARCHIVE/complete/_rg.ps1"
+# "$BIN" --generate complete-zsh > "$ARCHIVE/complete/_rg"
+# "$BIN" --generate man > "$ARCHIVE/doc/gcoder.1"
 
 tar c -C deployment/m2 -z -f "$ARCHIVE.tar.gz" "$NAME"
 shasum -a 256 "$ARCHIVE.tar.gz" > "$ARCHIVE.tar.gz.sha256"
