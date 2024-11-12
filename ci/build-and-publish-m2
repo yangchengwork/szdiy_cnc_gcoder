@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script builds a ripgrep release for the aarch64-apple-darwin target.
+# This script builds a gcoder release for the aarch64-apple-darwin target.
 # At time of writing (2023-11-21), GitHub Actions does not free Apple silicon
 # runners. Since I have somewhat recently acquired an M2 mac mini, I just use
 # this script to build the release tarball and upload it with `gh`.
@@ -24,7 +24,7 @@ fi
 target=aarch64-apple-darwin
 cargo build --release --target $target
 BIN=target/$target/release/rg
-NAME=ripgrep-$version-$target
+NAME=gcoder-$version-$target
 ARCHIVE="deployment/m2/$NAME"
 
 mkdir -p "$ARCHIVE"/{complete,doc}

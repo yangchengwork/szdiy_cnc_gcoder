@@ -199,7 +199,7 @@ jobs:
       shell: bash
       run: |
         version="${{ needs.create-release.outputs.version }}"
-        echo "ARCHIVE=ripgrep-$version-${{ matrix.target }}" >> $GITHUB_ENV
+        echo "ARCHIVE=gcoder-$version-${{ matrix.target }}" >> $GITHUB_ENV
 
     - name: Creating directory for archive
       shell: bash
@@ -310,7 +310,7 @@ jobs:
         cargo install cargo-deb
 
     # 'cargo deb' does not seem to provide a way to specify an asset that is
-    # created at build time, such as ripgrep's man page. To work around this,
+    # created at build time, such as gcoder's man page. To work around this,
     # we force a debug build, copy out the man page (and shell completions)
     # produced from that build, put it into a predictable location and then
     # build the deb, which knows where to look.
@@ -346,7 +346,7 @@ jobs:
         cargo deb --profile deb --target ${{ env.TARGET }}
         version="${{ needs.create-release.outputs.version }}"
         echo "DEB_DIR=target/${{ env.TARGET }}/debian" >> $GITHUB_ENV
-        echo "DEB_NAME=ripgrep_$version-1_amd64.deb" >> $GITHUB_ENV
+        echo "DEB_NAME=gcoder_$version-1_amd64.deb" >> $GITHUB_ENV
 
     - name: Create sha256 sum of deb file
       shell: bash
