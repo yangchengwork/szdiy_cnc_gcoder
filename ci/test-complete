@@ -3,7 +3,7 @@
 emulate zsh -o extended_glob -o no_function_argzero -o no_unset
 
 ##
-# Compares options in `rg --help` output to options in zsh completion function
+# Compares options in `gcoder --help` output to options in zsh completion function
 
 get_comp_args() {
     # Technically there are many options that the completion system sets that
@@ -18,17 +18,17 @@ get_comp_args() {
 
 main() {
     local diff
-    local  rg="${0:a:h}/../${TARGET_DIR:-target}/release/rg"
-    local _rg="${0:a:h}/../crates/core/flags/complete/rg.zsh"
+    local  gcoder="${0:a:h}/../${TARGET_DIR:-target}/release/gcoder"
+    local _rg="${0:a:h}/../crates/core/flags/complete/gcoder.zsh"
     local -a help_args comp_args
 
-    [[ -e $rg ]] || rg=${rg/%\/release\/rg/\/debug\/rg}
+    [[ -e $gcoder ]] || gcoder=${gcoder/%\/release\/gcoder/\/debug\/gcoder}
 
-     rg=${rg:a}
+     gcoder=${gcoder:a}
     _rg=${_rg:a}
 
-    [[ -e $rg ]] || {
-        print -r >&2 "File not found: $rg"
+    [[ -e $gcoder ]] || {
+        print -r >&2 "File not found: $gcoder"
         return 1
     }
     [[ -e $_rg ]] || {
@@ -36,17 +36,17 @@ main() {
         return 1
     }
 
-    print -rl - 'Comparing options:' "-$rg" "+$_rg"
+    print -rl - 'Comparing options:' "-$gcoder" "+$_rg"
 
     # 'Parse' options out of the `--help` output. To prevent false positives we
     # only look at lines where the first non-white-space character is `-`, or
     # where a long option starting with certain letters (see `_rg`) is found.
     # Occasionally we may have to handle some manually, however
     help_args=( ${(f)"$(
-        $rg --help |
-        $rg -i -- '^\s+--?[a-z0-9.]|--[a-z]' |
-        $rg -ior '$1' -- $'[\t /\"\'`.,](-[a-z0-9.]|--[a-z0-9-]+)(,|\\b)' |
-        $rg -v -- --print0 | # False positives
+        $gcoder --help |
+        $gcoder -i -- '^\s+--?[a-z0-9.]|--[a-z]' |
+        $gcoder -ior '$1' -- $'[\t /\"\'`.,](-[a-z0-9.]|--[a-z0-9-]+)(,|\\b)' |
+        $gcoder -v -- --print0 | # False positives
         sort -u
     )"} )
 
@@ -74,12 +74,12 @@ main() {
     diff="$(
         if diff --help 2>&1 | grep -qF -- '--label'; then
             diff -U2 \
-                --label '`rg --help`' \
+                --label '`gcoder --help`' \
                 --label '`_rg`' \
                 =( print -rl - $help_args ) =( print -rl - $comp_args )
         else
             diff -U2 \
-                -L '`rg --help`' \
+                -L '`gcoder --help`' \
                 -L '`_rg`' \
                 =( print -rl - $help_args ) =( print -rl - $comp_args )
         fi
