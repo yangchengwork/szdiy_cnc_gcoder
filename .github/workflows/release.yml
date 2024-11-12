@@ -61,11 +61,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        # - build: linux
-        #   os: ubuntu-latest
-        #   rust: nightly
-        #   target: x86_64-unknown-linux-musl
-        #   strip: x86_64-linux-musl-strip
+        - build: linux
+          os: ubuntu-latest
+          rust: nightly
+          target: x86_64-unknown-linux-musl
+          strip: x86_64-linux-musl-strip
         # - build: stable-x86
         #   os: ubuntu-latest
         #   rust: stable
