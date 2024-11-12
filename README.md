@@ -1,5 +1,10 @@
 ## How to use?
 
+0. Huggingface API token
+```
+export HF_TOKEN=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
+```
+
 1. 从`release`下载程序压缩包，并解压。
 2. 使用得到的应用程序，比如：
 ```
